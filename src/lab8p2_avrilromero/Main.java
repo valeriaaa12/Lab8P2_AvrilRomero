@@ -22,6 +22,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         llenarpaises();
         llenarNadadores();
+        llenarEventos();
+        listarTabla2();
     }
 
     /**
@@ -40,9 +42,9 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        cb_estilo2 = new javax.swing.JComboBox<>();
+        cb_distancia2 = new javax.swing.JComboBox<>();
+        record = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,7 +53,7 @@ public class Main extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_eventos = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -102,19 +104,24 @@ public class Main extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Record Actual");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Pecho", "Dorso", "Mariposa" }));
+        cb_estilo2.setBackground(new java.awt.Color(255, 255, 255));
+        cb_estilo2.setForeground(new java.awt.Color(0, 0, 0));
+        cb_estilo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Pecho", "Dorso", "Mariposa" }));
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "200", "400", "800" }));
+        cb_distancia2.setBackground(new java.awt.Color(255, 255, 255));
+        cb_distancia2.setForeground(new java.awt.Color(0, 0, 0));
+        cb_distancia2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "200", "400", "800" }));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        record.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton3.setBackground(new java.awt.Color(204, 255, 204));
         jButton3.setForeground(new java.awt.Color(0, 102, 102));
         jButton3.setText("Agregar Evento");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -129,9 +136,9 @@ public class Main extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, 182, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(cb_estilo2, 0, 182, Short.MAX_VALUE)
+                    .addComponent(cb_distancia2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(record))
                 .addContainerGap(480, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -140,15 +147,15 @@ public class Main extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_estilo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_distancia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(record, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(216, Short.MAX_VALUE))
@@ -222,19 +229,24 @@ public class Main extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setBackground(new java.awt.Color(204, 255, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_eventos.setBackground(new java.awt.Color(204, 255, 204));
+        tabla_eventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Estilo", "Distancia", "Record"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabla_eventos);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -542,9 +554,24 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    public int contarEstilo(String Estilo, ArrayList<Jugador> x) {
+        int cont = 0;
+        for (Jugador jugador : x) {
+            if (Estilo.equals(jugador.getEstilo())) {
+                cont++;
+            }
+        }
+        return cont;
+    }
+
     public void llenarNadadores() {
         aj.cargarArchivo();
         jugadores = aj.getListaJugadores();
+    }
+
+    public void llenarEventos() {
+        av.cargarArchivo();
+        eventos = av.getEventos();
     }
 
     private void listarTabla1(Jugador t) {
@@ -554,12 +581,12 @@ public class Main extends javax.swing.JFrame {
             tabla_jugadores.setModel(new javax.swing.table.DefaultTableModel(
                     new Object[][]{},
                     new String[]{
-                        "Nombre", "Ncionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo", "Medallas"
+                        "Nombre", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo", "Medallas"
                     }
             ));
 
             // TODO add your handling code here:
-            Object[] row = {t.getNombre(), t.getPais(), t.getEdad(), t.getEstatura(), t.getDistancia(), t.getTiempo(), t.getMedallas()};
+            Object[] row = {t.getNombre(), t.getPais(), t.getEdad(), t.getEstatura(), t.getEstilo(), t.getDistancia(), t.getTiempo(), t.getMedallas()};
             DefaultTableModel modelo = (DefaultTableModel) tabla_jugadores.getModel();
             modelo.addRow(row);
             tabla_jugadores.setModel(modelo);
@@ -567,6 +594,20 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void listarTabla2() {
+        DefaultTableModel modelo = (DefaultTableModel) tabla_eventos.getModel();
+        av.cargarArchivo();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        for (Evento t : eventos) {
+            Object[] row = {t.getEstilo(), t.getDistancia(), t.getRecord()};
+            modelo.addRow(row);
+
+        }
+        tabla_eventos.setModel(modelo);
     }
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -582,6 +623,8 @@ public class Main extends javax.swing.JFrame {
         double estatura1 = Double.parseDouble(estatura.getText());
         int index2 = cb_estilo.getSelectedIndex();
         String estilo = cb2.getElementAt(index).toString();
+        int contar = contarEstilo(estilo, jugadores);
+
         int index3 = cb_distancia1.getSelectedIndex();
         int distancia = Integer.parseInt(cb3.getElementAt(index3).toString());
         double tiempo1 = Double.parseDouble(tiempo.getText());
@@ -589,8 +632,9 @@ public class Main extends javax.swing.JFrame {
         Jugador j = new Jugador(nombre, pais, edad, estatura1, estilo, distancia, tiempo1, medals);
         pais.setNadador(j);
         aj.setAlumno(j);
-        aj.cargarArchivo();
         aj.escribirArchivo();
+        aj.cargarArchivo();
+
         JOptionPane.showMessageDialog(this,
                 " guardado exitosamente");
 
@@ -599,7 +643,8 @@ public class Main extends javax.swing.JFrame {
         estatura.setText("");
         tiempo.setText("");
         nummedallas.setText("");
-      
+
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -615,14 +660,14 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,
                 " guardado exitosamente");
         nombre_pais.setText("");
-        
-      
+
         DefaultComboBoxModel cb2 = (DefaultComboBoxModel) cb_paises.getModel();
-       
+
         cb2.addElement(p);
-       
+
         cb_paises.setModel(cb2);
-         
+
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
@@ -630,13 +675,44 @@ public class Main extends javax.swing.JFrame {
         DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_paises.getModel();
         int index = cb_paises.getSelectedIndex();
         Pais paises1 = (Pais) cb.getElementAt(index);
+        aj.cargarArchivo();
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) tabla_jugadores.getModel();
+        String nom = paises1.getNombre();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        for (Jugador t : jugadores) {
+            if (t.getPais().getNombre().equals(nom)) {
 
-        for (Jugador x : jugadores) {
-            if (x.getPais() == paises1) {
-                listarTabla1(x);
+                Object[] row = {t.getNombre(), t.getPais(), t.getEdad(), t.getEstatura(), t.getEstilo(), t.getDistancia(), t.getTiempo(), t.getMedallas()};
+                modelo.addRow(row);
             }
         }
+        tabla_jugadores.setModel(modelo);
+
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        //public Evento(String estilo, int distancia, double record) {
+        DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_estilo2.getModel();
+        DefaultComboBoxModel cb2 = (DefaultComboBoxModel) cb_distancia2.getModel();
+
+        int index = cb_estilo2.getSelectedIndex();
+        String estilo = cb.getElementAt(index).toString();
+        int index2 = cb_distancia2.getSelectedIndex();
+        int distancia = Integer.parseInt(cb2.getElementAt(index2).toString());
+        double record1 = Double.parseDouble(record.getText().toString());
+
+        Evento v = new Evento(estilo, distancia, record1);
+        av.setEventos(v);
+        av.escribirArchivo();
+        av.cargarArchivo();
+        JOptionPane.showMessageDialog(this,
+                " guardado exitosamente");
+        record.setText("");
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -677,9 +753,12 @@ public class Main extends javax.swing.JFrame {
     private ArrayList<Evento> eventos = new ArrayList();
     private adminPaises ap = new adminPaises("./PaisesParticipantes.lab");
     private adminJugador aj = new adminJugador("./Nadadores.lab");
+    private adminEventos av = new adminEventos("./Eventos");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_distancia1;
+    private javax.swing.JComboBox<String> cb_distancia2;
     private javax.swing.JComboBox<String> cb_estilo;
+    private javax.swing.JComboBox<String> cb_estilo2;
     private javax.swing.JComboBox<String> cb_nacionalidad;
     private javax.swing.JComboBox<String> cb_paises;
     private javax.swing.JTextField edad1;
@@ -688,8 +767,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -717,13 +794,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre_pais;
     private javax.swing.JTextField nummedallas;
+    private javax.swing.JTextField record;
     private javax.swing.JSpinner spinner;
+    private javax.swing.JTable tabla_eventos;
     private javax.swing.JTable tabla_jugadores;
     private javax.swing.JTextField tiempo;
     // End of variables declaration//GEN-END:variables
