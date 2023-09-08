@@ -13,8 +13,9 @@ import java.util.ArrayList;
  */
 public class Pais implements Serializable{
     private String nombre;
-    private ArrayList<Jugador> jugadores;
+    private ArrayList<Jugador> jugadores = new ArrayList();
     private int medallas;
+    private final long serialVersionUID = 333L;
 
     public Pais() {
     }
@@ -39,7 +40,9 @@ public class Pais implements Serializable{
     public void setJugadores(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
-
+    public void setNadador(Jugador a){
+        jugadores.add(a);
+    }
     public int getMedallas() {
         return medallas;
     }

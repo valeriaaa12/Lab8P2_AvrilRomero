@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class adminJugador implements Serializable{
    private ArrayList<Jugador> listaJugadores = new ArrayList();
     private File archivo = null;
-
+  private final long serialVersionUID = 333L;
     public adminJugador(String path) {
         archivo = new File(path);
     }

@@ -19,7 +19,7 @@ class Jugador implements Serializable {
     private int distancia;
     private double tiempo;
     private int medallas;
-
+  private final long serialVersionUID = 333L;
     public Jugador() {
     }
 

@@ -14,7 +14,7 @@ public class Evento implements Serializable {
     private String estilo;
     private int distancia;
     private double record;
-
+  private final long serialVersionUID = 333L;
     public Evento() {
     }
 

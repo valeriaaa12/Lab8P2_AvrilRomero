@@ -7,6 +7,7 @@ package lab8p2_avrilromero;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         llenarpaises();
+        llenarNadadores();
     }
 
     /**
@@ -46,6 +48,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_jugadores = new javax.swing.JTable();
         cb_paises = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -126,10 +129,9 @@ public class Main extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBox1, 0, 182, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1)))
+                    .addComponent(jComboBox1, 0, 182, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
                 .addContainerGap(480, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -159,28 +161,49 @@ public class Main extends javax.swing.JFrame {
         tabla_jugadores.setBackground(new java.awt.Color(204, 255, 204));
         tabla_jugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo", "Medallas"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabla_jugadores);
 
         cb_paises.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton4.setBackground(new java.awt.Color(204, 255, 204));
+        jButton4.setText("Ver tabla");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_paises, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_paises, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(385, 385, 385)
+                        .addComponent(jButton4)))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -190,7 +213,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(cb_paises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(20, 20, 20))
         );
 
         jTabbedPane1.addTab("Tabla Jugadores", jPanel5);
@@ -513,7 +538,35 @@ public class Main extends javax.swing.JFrame {
 
         }
         cb_paises.setModel(cb);
+        cb_nacionalidad.setModel(cb);
 
+    }
+
+    public void llenarNadadores() {
+        aj.cargarArchivo();
+        jugadores = aj.getListaJugadores();
+    }
+
+    private void listarTabla1(Jugador t) {
+        try {
+
+            //limpiar tabla
+            tabla_jugadores.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{
+                        "Nombre", "Ncionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo", "Medallas"
+                    }
+            ));
+
+            // TODO add your handling code here:
+            Object[] row = {t.getNombre(), t.getPais(), t.getEdad(), t.getEstatura(), t.getDistancia(), t.getTiempo(), t.getMedallas()};
+            DefaultTableModel modelo = (DefaultTableModel) tabla_jugadores.getModel();
+            modelo.addRow(row);
+            tabla_jugadores.setModel(modelo);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -528,38 +581,30 @@ public class Main extends javax.swing.JFrame {
         int edad = Integer.parseInt(edad1.getText());
         double estatura1 = Double.parseDouble(estatura.getText());
         int index2 = cb_estilo.getSelectedIndex();
-        String estilo = (String) cb2.getElementAt(index);
+        String estilo = cb2.getElementAt(index).toString();
         int index3 = cb_distancia1.getSelectedIndex();
-        int distancia = (int) cb3.getElementAt(index3);
+        int distancia = Integer.parseInt(cb3.getElementAt(index3).toString());
         double tiempo1 = Double.parseDouble(tiempo.getText());
         int medals = Integer.parseInt(nummedallas.getText());
         Jugador j = new Jugador(nombre, pais, edad, estatura1, estilo, distancia, tiempo1, medals);
-        pais.getJugadores().add(j);
-        /*
-        adminAlumno ap = new adminAlumno("./alumnos.cbm");
-        ap.cargarArchivo();
-        ap.setAlumno(p);
-        ap.escribirArchivo();
-        JOptionPane.showMessageDialog(this,
-                "Alumno guardado exitosamente");
-        tf_nombre.setText("");
-        tf_edad.setText("");
-         */
-        adminJugador aj = new adminJugador("/.Nadadores.lab");
-        aj.cargarArchivo();
+        pais.setNadador(j);
         aj.setAlumno(j);
+        aj.cargarArchivo();
         aj.escribirArchivo();
         JOptionPane.showMessageDialog(this,
                 " guardado exitosamente");
+
         nombre1.setText("");
         edad1.setText("");
         estatura.setText("");
         tiempo.setText("");
         nummedallas.setText("");
+      
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+
         String nombre = nombre_pais.getText();
         int medallas = (int) spinner.getModel().getValue();
         Pais p = new Pais(nombre, medallas);
@@ -570,9 +615,28 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,
                 " guardado exitosamente");
         nombre_pais.setText("");
-
-
+        
+      
+        DefaultComboBoxModel cb2 = (DefaultComboBoxModel) cb_paises.getModel();
+       
+        cb2.addElement(p);
+       
+        cb_paises.setModel(cb2);
+         
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_paises.getModel();
+        int index = cb_paises.getSelectedIndex();
+        Pais paises1 = (Pais) cb.getElementAt(index);
+
+        for (Jugador x : jugadores) {
+            if (x.getPais() == paises1) {
+                listarTabla1(x);
+            }
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -611,7 +675,8 @@ public class Main extends javax.swing.JFrame {
     private ArrayList<Jugador> jugadores = new ArrayList();
     private ArrayList<Pais> paises = new ArrayList();
     private ArrayList<Evento> eventos = new ArrayList();
-    private adminPaises ap= new adminPaises("./PaisesParticipantes.lab");
+    private adminPaises ap = new adminPaises("./PaisesParticipantes.lab");
+    private adminJugador aj = new adminJugador("./Nadadores.lab");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_distancia1;
     private javax.swing.JComboBox<String> cb_estilo;
@@ -622,6 +687,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
