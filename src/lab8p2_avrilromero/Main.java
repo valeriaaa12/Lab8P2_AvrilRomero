@@ -83,6 +83,17 @@ public class Main extends javax.swing.JFrame {
         nummedallas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
+        progress3 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        progress2 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jLabel15 = new javax.swing.JLabel();
+        cb_evento = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        cb_jugadores = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -510,15 +521,50 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Jugador", jPanel3);
 
+        progress3.setBackground(new java.awt.Color(255, 255, 255));
+        progress3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        progress3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 700, 30));
+        progress3.add(progress2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 700, 30));
+        progress3.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 710, 30));
+
+        jLabel15.setText("Evento");
+        progress3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+
+        progress3.add(cb_evento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 160, -1));
+
+        jLabel16.setText("Jugadores");
+        progress3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+
+        progress3.add(cb_jugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 160, -1));
+
+        jButton5.setText("Añadir jugador");
+        progress3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+
+        jButton6.setText("Iniciar simulacion");
+        progress3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 170, 30));
+
+        jButton7.setText("escoger evento");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        progress3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progress3, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(progress3, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Simulacion", jPanel8);
@@ -551,6 +597,18 @@ public class Main extends javax.swing.JFrame {
         }
         cb_paises.setModel(cb);
         cb_nacionalidad.setModel(cb);
+
+    }
+
+    public void llenareventos() {
+        av.cargarArchivo();
+        eventos = av.getEventos();
+        DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_evento.getModel();
+        for (Evento paise : eventos) {
+            cb.addElement(paise);
+
+        }
+        cb_evento.setModel(cb);
 
     }
 
@@ -714,6 +772,21 @@ public class Main extends javax.swing.JFrame {
         record.setText("");
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_evento.getModel();
+        int index = cb_evento.getSelectedIndex();
+        Evento evento = (Evento) cb.getElementAt(index);
+        String estilo= evento.getEstilo().toString();
+        int distancia = evento.getDistancia();
+        DefaultComboBoxModel cb1 = (DefaultComboBoxModel)cb_jugadores.getModel();
+        for (Jugador jugadore : jugadores) {
+            if (jugadore.getEstilo().equals(estilo)&&jugadore.getDistancia()==distancia) {
+                
+            }
+        }
+    }//GEN-LAST:event_jButton7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -759,6 +832,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_distancia2;
     private javax.swing.JComboBox<String> cb_estilo;
     private javax.swing.JComboBox<String> cb_estilo2;
+    private javax.swing.JComboBox<String> cb_evento;
+    private javax.swing.JComboBox<String> cb_jugadores;
     private javax.swing.JComboBox<String> cb_nacionalidad;
     private javax.swing.JComboBox<String> cb_paises;
     private javax.swing.JTextField edad1;
@@ -767,12 +842,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -790,6 +870,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -798,6 +880,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre_pais;
     private javax.swing.JTextField nummedallas;
+    private javax.swing.JProgressBar progress2;
+    private javax.swing.JPanel progress3;
     private javax.swing.JTextField record;
     private javax.swing.JSpinner spinner;
     private javax.swing.JTable tabla_eventos;
