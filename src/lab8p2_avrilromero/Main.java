@@ -756,9 +756,12 @@ public class Main extends javax.swing.JFrame {
         double estatura1 = Double.parseDouble(estatura.getText());
         int index2 = cb_estilo.getSelectedIndex();
         String estilo = cb2.getElementAt(index).toString();
-        int contar = contarEstilo(estilo, jugadores);
-        
-        int index3 = cb_distancia1.getSelectedIndex();
+        int contar = contarEstilo(estilo, pais.getJugadores());
+        if (contar>2) {
+            JOptionPane.showMessageDialog(this, "Estilo no disponible");
+        }else{
+            
+            int index3 = cb_distancia1.getSelectedIndex();
         int distancia = Integer.parseInt(cb3.getElementAt(index3).toString());
         double tiempo1 = Double.parseDouble(tiempo.getText());
         int medals = Integer.parseInt(nummedallas.getText());
@@ -776,6 +779,8 @@ public class Main extends javax.swing.JFrame {
         estatura.setText("");
         tiempo.setText("");
         nummedallas.setText("");
+        }
+        
         
 
     }//GEN-LAST:event_jButton1MouseClicked
