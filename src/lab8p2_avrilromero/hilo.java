@@ -6,6 +6,7 @@ package lab8p2_avrilromero;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 /**
@@ -16,12 +17,12 @@ public class hilo extends Thread {
 
     private ArrayList<Jugador> x;
     private ArrayList<JProgressBar> p;
- 
-    private boolean parar=true;
 
-    public hilo(ArrayList<Jugador> x,ArrayList<JProgressBar>p) {
+    private boolean parar = true;
+
+    public hilo(ArrayList<Jugador> x, ArrayList<JProgressBar> p) {
         this.x = x;
-        this.p=p;
+        this.p = p;
     }
 
     public ArrayList<Jugador> getX() {
@@ -32,8 +33,6 @@ public class hilo extends Thread {
         this.x = x;
     }
 
-   
-
     @Override
     public void run() {
         while (parar) {
@@ -41,9 +40,10 @@ public class hilo extends Thread {
             for (int i = 0; i < x.size(); i++) {
                 int r1 = r.nextInt(1, 10);
                 p.get(i).setValue(p.get(i).getValue() + r1);
-                if (p.get(i).getValue()==100) {
-                    
-                    parar =false;
+                if (p.get(i).getValue() == 100) {
+                  
+
+                    parar = false;
                     break;
 
                 }
