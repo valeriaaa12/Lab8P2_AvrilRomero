@@ -822,7 +822,7 @@ public class Main extends javax.swing.JFrame {
             hilo z = new hilo(nadadores,x);
             z.start();
          }else{
-            JOptionPane.showInputDialog(this,"Numero de nadadores incorrecto");
+            JOptionPane.showMessageDialog(this,"Numero de nadadores incorrecto");
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
