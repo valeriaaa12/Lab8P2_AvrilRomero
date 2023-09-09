@@ -17,13 +17,11 @@ public class hilo extends Thread {
     private ArrayList<Jugador> x;
     private ArrayList<JProgressBar> p;
  
-    private boolean parar;
+    private boolean parar=true;
 
-    public hilo(ArrayList<Jugador> x, JProgressBar barra, JProgressBar barra2, JProgressBar barra3) {
+    public hilo(ArrayList<Jugador> x,ArrayList<JProgressBar>p) {
         this.x = x;
-        this.barra = barra;
-        this.barra2 = barra2;
-        this.barra3 = barra3;
+        this.p=p;
     }
 
     public ArrayList<Jugador> getX() {
@@ -34,48 +32,24 @@ public class hilo extends Thread {
         this.x = x;
     }
 
-    public JProgressBar getBarra() {
-        return barra;
-    }
-
-    public void setBarra(JProgressBar barra) {
-        this.barra = barra;
-    }
-
-    public JProgressBar getBarra2() {
-        return barra2;
-    }
-
-    public void setBarra2(JProgressBar barra2) {
-        this.barra2 = barra2;
-    }
-
-    public JProgressBar getBarra3() {
-        return barra3;
-    }
-
-    public void setBarra3(JProgressBar barra3) {
-        this.barra3 = barra3;
-    }
+   
 
     @Override
     public void run() {
         while (parar) {
-
             Random r = new Random();
-
             for (int i = 0; i < x.size(); i++) {
                 int r1 = r.nextInt(1, 20);
                 p.get(i).setValue(p.get(i).getValue() + r1);
-                if (barra.getValue() == 100 || barra2.getValue() == 100 || barra3.getValue() == 100) {
-                    parar = true;
+                if (p.get(i).getValue()==100) {
+                    parar =false;
                     break;
 
                 }
             }
 
             try {
-                Thread.sleep(1);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
             }
         }

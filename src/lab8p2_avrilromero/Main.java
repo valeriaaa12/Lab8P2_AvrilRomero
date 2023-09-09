@@ -86,7 +86,7 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         progress3 = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progress1 = new javax.swing.JProgressBar();
         progress2 = new javax.swing.JProgressBar();
         jProgressBar2 = new javax.swing.JProgressBar();
         jLabel15 = new javax.swing.JLabel();
@@ -525,7 +525,7 @@ public class Main extends javax.swing.JFrame {
 
         progress3.setBackground(new java.awt.Color(255, 255, 255));
         progress3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        progress3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 700, 30));
+        progress3.add(progress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 700, 30));
         progress3.add(progress2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 700, 30));
         progress3.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 710, 30));
 
@@ -814,9 +814,13 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        if (nadadores.size()==2) {
+        if (nadadores.size()>=2) {
             ArrayList<JProgressBar> x = new ArrayList();
+            x.add(progress1);
             x.add(progress2);
+            x.add(jProgressBar2);
+            hilo z = new hilo(nadadores,x);
+            z.run();
          }else{
             
         }
@@ -906,7 +910,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -916,6 +919,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre_pais;
     private javax.swing.JTextField nummedallas;
+    private javax.swing.JProgressBar progress1;
     private javax.swing.JProgressBar progress2;
     private javax.swing.JPanel progress3;
     private javax.swing.JTextField record;
