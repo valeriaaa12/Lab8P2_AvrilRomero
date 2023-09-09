@@ -820,7 +820,7 @@ public class Main extends javax.swing.JFrame {
             x.add(progress2);
             x.add(jProgressBar2);
             hilo z = new hilo(nadadores,x);
-            z.run();
+            z.start();
          }else{
             
         }

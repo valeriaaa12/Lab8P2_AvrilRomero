@@ -39,9 +39,10 @@ public class hilo extends Thread {
         while (parar) {
             Random r = new Random();
             for (int i = 0; i < x.size(); i++) {
-                int r1 = r.nextInt(1, 20);
+                int r1 = r.nextInt(1, 10);
                 p.get(i).setValue(p.get(i).getValue() + r1);
                 if (p.get(i).getValue()==100) {
+                    
                     parar =false;
                     break;
 
