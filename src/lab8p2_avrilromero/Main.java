@@ -25,7 +25,9 @@ public class Main extends javax.swing.JFrame {
         llenarNadadores();
         llenareventos();
         llenarEventos();
+        llenarGanadores();
         listarTabla2();
+        listarTabla3();
     }
 
     /**
@@ -58,7 +60,7 @@ public class Main extends javax.swing.JFrame {
         tabla_eventos = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabla_Ganadores = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -238,7 +240,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.addTab("Tabla Jugadores", jPanel5);
+        jTabbedPane1.addTab("Tabla Nadadores", jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -282,19 +284,19 @@ public class Main extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setBackground(new java.awt.Color(204, 255, 204));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_Ganadores.setBackground(new java.awt.Color(204, 255, 204));
+        tabla_Ganadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Estilo", "Distancia"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tabla_Ganadores);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -521,7 +523,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Agregar Jugador", jPanel3);
+        jTabbedPane1.addTab("Agregar Nadadores", jPanel3);
 
         progress3.setBackground(new java.awt.Color(255, 255, 255));
         progress3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -643,6 +645,10 @@ public class Main extends javax.swing.JFrame {
         av.cargarArchivo();
         eventos = av.getEventos();
     }
+     public void llenarGanadores() {
+        ag.cargarArchivo();
+        ganadores = ag.getGanadores();
+    }
 
     private void listarTabla1(Jugador t) {
         try {
@@ -674,6 +680,20 @@ public class Main extends javax.swing.JFrame {
         }
         for (Evento t : eventos) {
             Object[] row = {t.getEstilo(), t.getDistancia(), t.getRecord()};
+            modelo.addRow(row);
+
+        }
+        tabla_eventos.setModel(modelo);
+    }
+
+    private void listarTabla3() {
+        DefaultTableModel modelo = (DefaultTableModel) tabla_Ganadores.getModel();
+        ag.cargarArchivo();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        for (Jugador t : ganadores) {
+            Object[] row = {t.getNombre(),t.getEstilo(),t.getDistancia()};
             modelo.addRow(row);
 
         }
@@ -803,10 +823,10 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
-         DefaultComboBoxModel cb1 = (DefaultComboBoxModel) cb_jugadores.getModel();
-         int index = cb_jugadores.getSelectedIndex();
-         Jugador selcted = (Jugador) cb1.getElementAt(index);
-         if (nadadores.size()<3) {
+        DefaultComboBoxModel cb1 = (DefaultComboBoxModel) cb_jugadores.getModel();
+        int index = cb_jugadores.getSelectedIndex();
+        Jugador selcted = (Jugador) cb1.getElementAt(index);
+        if (nadadores.size() < 3) {
             nadadores.add(selcted);
             JOptionPane.showMessageDialog(this, "Nadador Añadido");
         }
@@ -814,15 +834,16 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        if (nadadores.size()==2||nadadores.size()==3) {
+        if (nadadores.size() == 2 || nadadores.size() == 3) {
             ArrayList<JProgressBar> x = new ArrayList();
             x.add(progress1);
             x.add(progress2);
             x.add(jProgressBar2);
-            hilo z = new hilo(nadadores,x);
+            hilo z = new hilo(nadadores, x);
             z.start();
-         }else{
-            JOptionPane.showMessageDialog(this,"Numero de nadadores incorrecto");
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Numero de nadadores incorrecto");
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
@@ -861,12 +882,14 @@ public class Main extends javax.swing.JFrame {
         });
     }
     private ArrayList<Jugador> jugadores = new ArrayList();
+    private ArrayList<Jugador> ganadores = new ArrayList();
     private ArrayList<Jugador> nadadores = new ArrayList();
     private ArrayList<Pais> paises = new ArrayList();
     private ArrayList<Evento> eventos = new ArrayList();
     private adminPaises ap = new adminPaises("./PaisesParticipantes.lab");
     private adminJugador aj = new adminJugador("./Nadadores.lab");
     private adminEventos av = new adminEventos("./Eventos");
+    adminGanadores ag = new adminGanadores("./Ganadores.lab");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_distancia1;
     private javax.swing.JComboBox<String> cb_distancia2;
@@ -915,7 +938,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nombre1;
     private javax.swing.JTextField nombre_pais;
     private javax.swing.JTextField nummedallas;
@@ -924,6 +946,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel progress3;
     private javax.swing.JTextField record;
     private javax.swing.JSpinner spinner;
+    private javax.swing.JTable tabla_Ganadores;
     private javax.swing.JTable tabla_eventos;
     private javax.swing.JTable tabla_jugadores;
     private javax.swing.JTextField tiempo;

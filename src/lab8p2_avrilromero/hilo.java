@@ -22,7 +22,7 @@ public class hilo extends Thread implements Serializable {
 
     private ArrayList<Jugador> x;
     private ArrayList<JProgressBar> p;
-    private File archivo = null;
+    private File archivo = new File("./GanadoresdeTodaLaVida");
     private boolean parar = true;
 
     public hilo(ArrayList<Jugador> x, ArrayList<JProgressBar> p) {
@@ -50,29 +50,11 @@ public class hilo extends Thread implements Serializable {
                     parar = false;
                     String nombre = x.get(i).getNombre();
                     JOptionPane.showMessageDialog(null, "El ganador es: " + nombre);
-                    try {
-                        ArrayList<Jugador> eventos = new ArrayList();
-                        Jugador temp;
-                        if (archivo.exists()) {
-                            FileInputStream entrada
-                                    = new FileInputStream(archivo);
-                            ObjectInputStream objeto
-                                    = new ObjectInputStream(entrada);
-                            try {
-                                while ((temp = (Jugador) objeto.readObject()) != null) {
-                                    eventos.add(temp);
-                                }
-                            } catch (EOFException e) {
-                                //encontro el final del archivo
-                            }
-                            objeto.close();
-                            entrada.close();
-                        }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                    break;
-
+                    adminGanadores ag = new adminGanadores("./Ganadores.lab");
+                    ag.setGanador(x.get(i));
+                    ag.escribirArchivo();
+                    ag.cargarArchivo();
+              
                 }
             }
 
