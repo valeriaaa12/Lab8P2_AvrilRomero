@@ -7,6 +7,7 @@ package lab8p2_avrilromero;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -547,6 +548,11 @@ public class Main extends javax.swing.JFrame {
         progress3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
         jButton6.setText("Iniciar simulacion");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         progress3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 170, 30));
 
         jButton7.setText("escoger evento");
@@ -805,6 +811,16 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nadador Añadido");
         }
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        if (nadadores.size()==2) {
+            ArrayList<JProgressBar> x = new ArrayList();
+            x.add(progress2);
+         }else{
+            
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments

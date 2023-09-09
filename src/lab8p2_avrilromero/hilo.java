@@ -16,9 +16,7 @@ public class hilo extends Thread {
 
     private ArrayList<Jugador> x;
     private ArrayList<JProgressBar> p;
-    private JProgressBar barra;
-    private JProgressBar barra2;
-    private JProgressBar barra3;
+ 
     private boolean parar;
 
     public hilo(ArrayList<Jugador> x, JProgressBar barra, JProgressBar barra2, JProgressBar barra3) {
