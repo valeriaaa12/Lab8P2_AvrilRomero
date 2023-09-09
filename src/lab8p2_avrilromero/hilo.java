@@ -41,9 +41,11 @@ public class hilo extends Thread {
                 int r1 = r.nextInt(1, 10);
                 p.get(i).setValue(p.get(i).getValue() + r1);
                 if (p.get(i).getValue() == 100) {
-                  
 
                     parar = false;
+                    String nombre = x.get(i).getNombre();
+                    JOptionPane.showMessageDialog(null, "El ganador es: " + nombre);
+
                     break;
 
                 }

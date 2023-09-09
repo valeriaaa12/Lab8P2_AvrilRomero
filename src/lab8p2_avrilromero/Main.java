@@ -814,7 +814,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        if (nadadores.size()>=2&&nadadores.size()<=3) {
+        if (nadadores.size()==2||nadadores.size()==3) {
             ArrayList<JProgressBar> x = new ArrayList();
             x.add(progress1);
             x.add(progress2);
@@ -822,7 +822,7 @@ public class Main extends javax.swing.JFrame {
             hilo z = new hilo(nadadores,x);
             z.start();
          }else{
-            
+            JOptionPane.showInputDialog(this,"Numero de nadadores incorrecto");
         }
     }//GEN-LAST:event_jButton6MouseClicked
 
