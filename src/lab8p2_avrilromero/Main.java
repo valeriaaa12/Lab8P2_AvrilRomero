@@ -22,6 +22,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         llenarpaises();
         llenarNadadores();
+        llenareventos();
         llenarEventos();
         listarTabla2();
     }
@@ -538,6 +539,11 @@ public class Main extends javax.swing.JFrame {
         progress3.add(cb_jugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 160, -1));
 
         jButton5.setText("Añadir jugador");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         progress3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
 
         jButton6.setText("Iniciar simulacion");
@@ -774,18 +780,31 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         // TODO add your handling code here:
+        aj.cargarArchivo();
         DefaultComboBoxModel cb = (DefaultComboBoxModel) cb_evento.getModel();
         int index = cb_evento.getSelectedIndex();
         Evento evento = (Evento) cb.getElementAt(index);
-        String estilo= evento.getEstilo().toString();
+        String estilo = evento.getEstilo().toString();
         int distancia = evento.getDistancia();
-        DefaultComboBoxModel cb1 = (DefaultComboBoxModel)cb_jugadores.getModel();
+        DefaultComboBoxModel cb1 = (DefaultComboBoxModel) cb_jugadores.getModel();
         for (Jugador jugadore : jugadores) {
-            if (jugadore.getEstilo().equals(estilo)&&jugadore.getDistancia()==distancia) {
-                
+            if (jugadore.getEstilo().equals(estilo) && jugadore.getDistancia() == distancia) {
+                cb1.addElement(jugadore);
             }
         }
+        cb_jugadores.setModel(cb1);
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+         DefaultComboBoxModel cb1 = (DefaultComboBoxModel) cb_jugadores.getModel();
+         int index = cb_jugadores.getSelectedIndex();
+         Jugador selcted = (Jugador) cb1.getElementAt(index);
+         if (nadadores.size()<3) {
+            nadadores.add(selcted);
+            JOptionPane.showMessageDialog(this, "Nadador Añadido");
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -822,6 +841,7 @@ public class Main extends javax.swing.JFrame {
         });
     }
     private ArrayList<Jugador> jugadores = new ArrayList();
+    private ArrayList<Jugador> nadadores = new ArrayList();
     private ArrayList<Pais> paises = new ArrayList();
     private ArrayList<Evento> eventos = new ArrayList();
     private adminPaises ap = new adminPaises("./PaisesParticipantes.lab");

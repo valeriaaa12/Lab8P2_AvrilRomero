@@ -15,6 +15,7 @@ import javax.swing.JProgressBar;
 public class hilo extends Thread {
 
     private ArrayList<Jugador> x;
+    private ArrayList<JProgressBar> p;
     private JProgressBar barra;
     private JProgressBar barra2;
     private JProgressBar barra3;
@@ -64,17 +65,15 @@ public class hilo extends Thread {
         while (parar) {
 
             Random r = new Random();
-            Random r2 = new Random();
-            Random r3 = new Random();
-            int r1 = r.nextInt(1, 20);
-            int r22 = r2.nextInt(1, 20);
-            int r33 = r3.nextInt(1, 20);
-            barra.setValue(barra.getValue() + r1);
-            barra2.setValue(barra2.getValue() + r22);
-            barra3.setValue(barra3.getValue() + r33);
-            if (barra.getValue() == 100 || barra2.getValue() == 100 || barra3.getValue() == 100) {
-                parar = true;
 
+            for (int i = 0; i < x.size(); i++) {
+                int r1 = r.nextInt(1, 20);
+                p.get(i).setValue(p.get(i).getValue() + r1);
+                if (barra.getValue() == 100 || barra2.getValue() == 100 || barra3.getValue() == 100) {
+                    parar = true;
+                    break;
+
+                }
             }
 
             try {

@@ -100,7 +100,7 @@ class Jugador implements Serializable {
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", pais=" + pais + ", edad=" + edad + ", estatura=" + estatura + ", estilo=" + estilo + ", distancia=" + distancia + ", tiempo=" + tiempo + ", medallas=" + medallas + '}';
+        return nombre;
     }
     
 }
